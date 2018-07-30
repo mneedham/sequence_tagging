@@ -53,11 +53,6 @@ def home():
         preds = model.predict(words_raw)
         ingredient["preds"] = preds
 
-        to_print = align_data({"input": words_raw, "output": preds})
-
-        for key, seq in to_print.items():
-            model.logger.info(seq)
-
     return render_template("index.html", ingredients=ingredients)
 
 
