@@ -1,0 +1,42 @@
+<html>
+
+<head>
+    <title>Train those ingredients</title>
+</head>
+
+<body>
+
+<ul>
+    {% for ingredient in ingredients %}
+    <li>
+
+        {{ ingredient.value}} [{{ingredient.ingredientId}}]
+
+
+        <form method="POST" action="/ingredient/{{ingredient.ingredientId}}">
+            {% for token in ingredient.tokens %}
+            <div style="display: inline; width: 150px">
+                {{ token.value }}
+
+                <select name="label_{{token.index}}">
+                    <option value="O" {{ 'selected' if ingredient.preds[loop.index0] == 'O' }}>O</option>
+                    <option value="B-ING" {{ 'selected' if ingredient.preds[loop.index0] == 'B-ING' }}>B-ING</option>
+                    <option value="I-ING" {{ 'selected' if ingredient.preds[loop.index0] == 'I-ING' }}>I-ING</option>
+                </select>
+
+
+            </div>
+            {% endfor %}
+
+            <input type="submit"/>
+        </form>
+
+
+    </li>
+    {% endfor %}
+</ul>
+
+
+</body>
+
+</html>
